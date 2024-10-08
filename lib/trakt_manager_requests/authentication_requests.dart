@@ -114,7 +114,7 @@ class Authentication extends Category {
   ///
   /// The access_token is valid for 3 months.
   /// Save and use the refresh_token to get a new access_token without asking the user to re-authenticate.
-  Future<AccessTokenResponse> getDeviceAccessToken(String code) async {
+  Future<AccessTokenResponse?> getDeviceAccessToken(String code) async {
     final url = Uri.https(_manager._baseURL, "oauth/device/token");
     Map<String, String> body = {
       "code": code,
@@ -127,8 +127,11 @@ class Authentication extends Category {
       body: jsonEncode(body),
     );
 
-    if (![200, 201, 204].contains(response.statusCode)) {
+    if ([404, 409,410,418,429].contains(response.statusCode)) {
       throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
+    }
+    if (![200, 201, 204].contains(response.statusCode)) {
+      return null;
     }
 
     final jsonResult = jsonDecode(response.body);
