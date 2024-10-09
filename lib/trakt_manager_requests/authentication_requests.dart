@@ -27,9 +27,9 @@ class Authentication extends Category {
   ///
   /// The access_token is valid for 3 months.
   /// Save and use the refresh_token to get a new access_token without asking the user to re-authenticate.
-  Future<AccessTokenResponse> getAccessToken(String code) async {
-    return _oauthToken({"code": code});
-  }
+  Future<AccessTokenResponse> getAccessToken(String code) async =>
+     _oauthToken({"code": code, "grant_type": "authorization_code"});
+
 
   /// Use the refresh_token to get a new access_token without asking the user to re-authenticate.
   ///
@@ -43,7 +43,7 @@ class Authentication extends Category {
       throw Exception("Refresh token is null");
     }
 
-    return _oauthToken({"refresh_token": _manager._refreshToken!});
+    return _oauthToken({"refresh_token": _manager._refreshToken!, "grant_type": "refresh_token"});
   }
 
   /// An access_token can be revoked when a user signs out of their Trakt account in your app.
@@ -57,8 +57,9 @@ class Authentication extends Category {
       "client_secret": _manager._clientSecret!,
     };
     final response = await _manager.client.post(
-        url, headers: {"Content-Type": "application/json"},
-        body: jsonEncode(body),
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode(body),
     );
     if (![200, 201, 204].contains(response.statusCode)) {
       throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
@@ -76,9 +77,12 @@ class Authentication extends Category {
       "client_id": _manager._clientId!,
       "client_secret": _manager._clientSecret!,
       "redirect_uri": _manager._redirectURI!,
-      "grant_type": "authorization_code"
     });
-    final response = await _manager.client.post(url, headers: {"Content-Type": "application/json"}, body: body);
+    final response = await _manager.client.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode(body),
+    );
 
     if (![200, 201, 204].contains(response.statusCode)) {
       throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
@@ -145,7 +149,7 @@ class Authentication extends Category {
     return accessTokenResponse;
   }
 
-  void setAccessToken({required String accessToken, required String refreshToken}){
+  void setAccessToken({required String accessToken, required String refreshToken}) {
     _manager._accessToken = accessToken;
     _manager._refreshToken = refreshToken;
   }
