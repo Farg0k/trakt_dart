@@ -50,14 +50,16 @@ class Authentication extends Category {
   ///
   /// This is not required, but might improve the user experience so the user doesn't have an unused app connection hanging around.
   Future<void> revokeAccessToken() async {
-    final url = Uri.https(_manager._baseURL, "oauth/token");
+    final url = Uri.https(_manager._baseURL, "oauth/revoke");
     final body = {
       "token": _manager._accessToken,
       "client_id": _manager._clientId!,
       "client_secret": _manager._clientSecret!,
     };
-    final response = await _manager.client.post(url, headers: {"Content-Type": "application/json"}, body: body);
-
+    final response = await _manager.client.post(
+        url, headers: {"Content-Type": "application/json"},
+        body: jsonEncode(body),
+    );
     if (![200, 201, 204].contains(response.statusCode)) {
       throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
     }
@@ -127,11 +129,11 @@ class Authentication extends Category {
       body: jsonEncode(body),
     );
 
-    if ([404, 409,410,418,429].contains(response.statusCode)) {
-      throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
+    if ([400].contains(response.statusCode)) {
+      return null;
     }
     if (![200, 201, 204].contains(response.statusCode)) {
-      return null;
+      throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
     }
 
     final jsonResult = jsonDecode(response.body);
@@ -141,5 +143,10 @@ class Authentication extends Category {
     _manager._refreshToken = accessTokenResponse.refreshToken;
 
     return accessTokenResponse;
+  }
+
+  void setAccessToken({required String accessToken, required String refreshToken}){
+    _manager._accessToken = accessToken;
+    _manager._refreshToken = refreshToken;
   }
 }
