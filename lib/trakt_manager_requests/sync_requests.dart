@@ -370,6 +370,13 @@ class Sync extends Category {
         body: jsonEncode(body));
   }
 
+
+  Future<AddToSyncResponse> addToHistoryRaw({
+    required Map<String, dynamic> body
+  }) async {
+    return await _manager._authenticatedPost<AddToSyncResponse>("sync/history",
+        body: jsonEncode(body));
+  }
   /// Remove items from a user's watch history including all watches, scrobbles, and checkins.
   ///
   /// Accepts shows, seasons, episodes and movies. If only a show is passed, all episodes for the show will be removed.

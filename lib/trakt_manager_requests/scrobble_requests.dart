@@ -140,4 +140,11 @@ class Scrobble extends Category {
     return await _manager._authenticatedPost<ScrobbleResponse>("scrobble/stop",
         body: jsonEncode(body));
   }
+
+  Future<ScrobbleResponse> stopWatchingRaw({
+    required Map<String, dynamic> body,
+  }) async {
+    return await _manager._authenticatedPost<ScrobbleResponse>("scrobble/stop",
+        body: jsonEncode(body));
+  }
 }
