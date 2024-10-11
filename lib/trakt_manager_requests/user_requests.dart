@@ -84,7 +84,7 @@ class Users extends Category {
     return await _manager._authenticatedGetList<HiddenItem>("users/hidden/${section.value}",
         extendedFull: extendedFull,
         pagination: pagination,
-        queryParamameters: (type != null) ? {"type": type.value} : null);
+        queryParameters: (type != null) ? {"type": type.value} : null);
   }
 
   /// Hide items for a specific section. Here's what type of items can hidden for each section.
@@ -227,7 +227,7 @@ class Users extends Category {
 
     if (useOAuth) {
       return await _manager._authenticatedGetList<UserCollectionItem>("users/$id/collection/${type.value}",
-          queryParamameters: params);
+          queryParameters: params);
     }
 
     return await _manager._getList<UserCollectionItem>("users/$id/collection/${type.value}", queryParamameters: params);
@@ -272,7 +272,7 @@ class Users extends Category {
 
     if (useOAuth) {
       return await _manager._authenticatedGetList<MediaComment>("users/$id/comments$request",
-          queryParamameters: params, pagination: pagination, extendedFull: extendedFull);
+          queryParameters: params, pagination: pagination, extendedFull: extendedFull);
     }
 
     return await _manager._getList<MediaComment>("users/$id/comments$request",
@@ -711,7 +711,7 @@ class Users extends Category {
 
     if (useOAuth) {
       return await _manager._authenticatedGetList<HistoryItem>(request,
-          extendedFull: extendedFull, pagination: pagination, queryParamameters: params);
+          extendedFull: extendedFull, pagination: pagination, queryParameters: params);
     }
     return await _manager._getList<HistoryItem>(request,
         extendedFull: extendedFull, pagination: pagination, queryParamameters: params);
@@ -866,7 +866,7 @@ class Users extends Category {
 
     if (useOAuth) {
       return await _manager._authenticatedGetList<WatchedItem>("users/$id/watched/${type.value}",
-          queryParamameters: params);
+          queryParameters: params);
     }
     return await _manager._getList<WatchedItem>("users/$id/watched/${type.value}", queryParamameters: params);
   }

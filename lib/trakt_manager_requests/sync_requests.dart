@@ -88,7 +88,7 @@ class Sync extends Category {
 
     return await _manager._authenticatedGetList<PlaybackProgress>(
         "sync/last_activities$request",
-        queryParamameters: params);
+        queryParameters: params);
   }
 
   /// Remove a playback item from a user's playback progress list. A 404 will be returned if the id is invalid.
@@ -134,7 +134,7 @@ class Sync extends Category {
     }
     return await _manager._authenticatedGetList<UserCollectionItem>(
         "sync/collection/${type.value}",
-        queryParamameters: params);
+        queryParameters: params);
   }
 
   /// Add items to a user's collection. Accepts shows, seasons, episodes and movies.
@@ -264,7 +264,7 @@ class Sync extends Category {
 
     return await _manager._authenticatedGetList<WatchedItem>(
         "sync/watched/${type.value}",
-        queryParamameters: params);
+        queryParameters: params);
   }
 
   /// Returns movies and episodes that a user has watched, sorted by most recent.
@@ -308,7 +308,7 @@ class Sync extends Category {
     return await _manager._authenticatedGetList<HistoryItem>(request,
         extendedFull: extendedFull,
         pagination: pagination,
-        queryParamameters: params);
+        queryParameters: params);
   }
 
   /// Add items to a user's watch history.

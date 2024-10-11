@@ -14,13 +14,22 @@ class Recommendations extends Category {
   /// [ignoreCollected] -filter out collected movies
   ///
   /// 🔒 OAuth Required ✨ Extended Info
-  Future<List<Movie>> getMovieRecommendations(
-      {bool? ignoreCollected, bool extendedFull = false}) async {
-    return await _manager._authenticatedGetList<Movie>("recommendations/movies",
-        extendedFull: extendedFull,
-        queryParamameters: (ignoreCollected ?? false)
-            ? {"ignore_collected": ignoreCollected!}
-            : null);
+  Future<List<Movie>> getMovieRecommendations({
+    bool? ignoreCollected,
+    bool? ignoreWatchListed,
+    int? limit,
+    bool extendedFull = false,
+  }) async {
+    final queryParameters = {
+      if (ignoreCollected != null) 'ignore_collected': ignoreCollected,
+      if (ignoreWatchListed != null) 'ignore_watchlisted': ignoreWatchListed,
+      if (limit != null) 'limit': limit.clamp(1, 100),
+    };
+    return await _manager._authenticatedGetList<Movie>(
+      "recommendations/movies",
+      extendedFull: extendedFull,
+      queryParameters: queryParameters.isNotEmpty ? queryParameters : null,
+    );
   }
 
   /// Hide a movie from getting recommended anymore.
@@ -40,13 +49,22 @@ class Recommendations extends Category {
   /// [ignoreCollected] -filter out collected movies
   ///
   /// 🔒 OAuth Required ✨ Extended Info
-  Future<List<Show>> getShowRecommendations(
-      {bool? ignoreCollected, bool extendedFull = false}) async {
-    return await _manager._authenticatedGetList<Show>("recommendations/shows",
-        extendedFull: extendedFull,
-        queryParamameters: (ignoreCollected ?? false)
-            ? {"ignore_collected": ignoreCollected!}
-            : null);
+  Future<List<Show>> getShowRecommendations({
+    bool? ignoreCollected,
+    bool? ignoreWatchListed,
+    int? limit,
+    bool extendedFull = false,
+  }) async {
+    final queryParameters = {
+      if (ignoreCollected != null) 'ignore_collected': ignoreCollected,
+      if (ignoreWatchListed != null) 'ignore_watchlisted': ignoreWatchListed,
+      if (limit != null) 'limit': limit.clamp(1, 100),
+    };
+    return await _manager._authenticatedGetList<Show>(
+      "recommendations/shows",
+      extendedFull: extendedFull,
+      queryParameters: queryParameters.isNotEmpty ? queryParameters : null,
+    );
   }
 
   /// Hide a show from getting recommended anymore.
