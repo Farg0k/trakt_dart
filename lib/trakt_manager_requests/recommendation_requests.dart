@@ -20,10 +20,10 @@ class Recommendations extends Category {
     int? limit,
     bool extendedFull = false,
   }) async {
-    final queryParameters = {
+    Map<String, dynamic> queryParameters = {
       if (ignoreCollected != null) 'ignore_collected': ignoreCollected,
       if (ignoreWatchListed != null) 'ignore_watchlisted': ignoreWatchListed,
-      if (limit != null) 'limit': limit.clamp(1, 100),
+      if (limit != null) 'limit': limit.clamp(1, 100).toString(),
     };
     return await _manager._authenticatedGetList<Movie>(
       "recommendations/movies",
@@ -55,10 +55,10 @@ class Recommendations extends Category {
     int? limit,
     bool extendedFull = false,
   }) async {
-    final queryParameters = {
+    Map<String, dynamic> queryParameters = {
       if (ignoreCollected != null) 'ignore_collected': ignoreCollected,
       if (ignoreWatchListed != null) 'ignore_watchlisted': ignoreWatchListed,
-      if (limit != null) 'limit': limit.clamp(1, 100),
+      if (limit != null) 'limit': limit.clamp(1, 100).toString(),
     };
     return await _manager._authenticatedGetList<Show>(
       "recommendations/shows",
