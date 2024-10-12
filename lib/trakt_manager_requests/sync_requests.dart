@@ -583,6 +583,14 @@ class Sync extends Category {
         body: jsonEncode(body));
   }
 
+  Future<AddToSyncResponse> addToWatchlistRaw(
+      {required Map<String, dynamic> body}) async {
+
+    return await _manager._authenticatedPost<AddToSyncResponse>(
+        "sync/watchlist",
+        body: jsonEncode(body));
+  }
+
   /// Remove one or more items from a user's watchlist.
   ///
   /// 🔒 OAuth Required
