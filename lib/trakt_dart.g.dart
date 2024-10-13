@@ -820,7 +820,9 @@ ScrobbleResponse _$ScrobbleResponseFromJson(Map<String, dynamic> json) =>
       json['id'] as int,
       json['action'] as String,
       (json['progress'] as num).toDouble(),
-      CheckInSharing.fromJson(json['sharing'] as Map<String, dynamic>),
+          json['sharing'] == null
+              ? null
+              : CheckInSharing.fromJson(json['sharing'] as Map<String, dynamic>),
       json['movie'] == null
           ? null
           : Movie.fromJson(json['movie'] as Map<String, dynamic>),

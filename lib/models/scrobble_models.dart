@@ -5,7 +5,7 @@ class ScrobbleResponse {
   final int id;
   final String action;
   final double progress;
-  final CheckInSharing sharing;
+  final CheckInSharing? sharing;
   final Movie? movie;
   final Episode? episode;
   final Show? show;
