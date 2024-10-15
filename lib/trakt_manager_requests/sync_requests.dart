@@ -621,6 +621,14 @@ class Sync extends Category {
         body: jsonEncode(body));
   }
 
+  Future<RemoveFromSyncResponse> removeFromWatchlistRaw(
+      {required Map<String, dynamic> body}) async {
+
+    return await _manager._authenticatedPost<RemoveFromSyncResponse>(
+        "sync/watchlist/remove",
+        body: jsonEncode(body));
+  }
+
   /// Reorder all items on a user's watchlist by sending the updated rank of list item ids.
   ///
   /// Use the /sync/watchlist method to get all list item ids.
