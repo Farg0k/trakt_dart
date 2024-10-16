@@ -536,11 +536,10 @@ class Sync extends Category {
     var request = "sync/watchlist";
     if (type != null) {
       request += "/${type.value}";
-      if (sortBy != null) {
-        request += "/${sortBy.value}";
-      }
     }
-
+    if (sortBy != null) {
+      request += "/${sortBy.value}";
+    }
     return await _manager._authenticatedGetList<WatchlistItem>(request,
         extendedFull: extendedFull, pagination: pagination);
   }
