@@ -64,7 +64,7 @@ class Search extends Category {
     bool extendedFull = false,
     RequestPagination? pagination,
   }) async {
-    Map<String, String>? params;
+    Map<String, dynamic>? params;
     if (searchTypes?.isNotEmpty ?? false) {
       params = {"type": searchTypes!.map((type) => type.value).join(",")};
     }
