@@ -412,6 +412,13 @@ class Sync extends Category {
         body: jsonEncode(body));
   }
 
+
+  Future<RemoveFromSyncResponse> removeFromHistoryRaw(
+      {required Map<String, dynamic> body}) async {
+    return await _manager._authenticatedPost<RemoveFromSyncResponse>(
+        "sync/history/remove",
+        body: jsonEncode(body));
+  }
   /// Get a user's ratings filtered by type.
   ///
   /// You can optionally filter for a specific rating between 1 and 10.
