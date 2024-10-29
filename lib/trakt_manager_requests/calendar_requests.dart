@@ -89,6 +89,26 @@ class Calendar extends Category {
         filters: filters);
   }
 
+  Future<List<MyCalendarShow>> getMyFinales(
+      {String? startDate,
+        int? numberOfDays,
+        bool extendedFull = false,
+        Filters? filters}) async {
+    assert(
+    (startDate == null && numberOfDays == null) ||
+        (startDate != null && numberOfDays != null),
+    "Both startdate and numberOfDays need to be given or both be null");
+
+    var request = "";
+    if (startDate != null) {
+      request = "/$startDate/$numberOfDays";
+    }
+    return await _manager._authenticatedGetList<MyCalendarShow>(
+        "calendars/my/shows/finales$request",
+        extendedFull: extendedFull,
+        filters: filters);
+  }
+
   /// Returns all movies with a release date during the time period specified.
   ///
   /// [startDate] - Start the calendar on this date.
