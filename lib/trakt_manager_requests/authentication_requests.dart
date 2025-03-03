@@ -17,8 +17,7 @@ class Authentication extends Category {
   /// If the user isn't signed into Trakt, it will ask them to do so.
   /// Send signup=true if you prefer the account sign up page to be the default.
   Future<void> authorizeApplication({bool? signup}) async {
-    final url = Uri.parse(_manager._oauthURL);
-    await ChromeSafariBrowser().open(url: url);
+    await ChromeSafariBrowser().open(url: WebUri(_manager._oauthURL));
   }
 
   /// Use the authorization code GET parameter sent back to your redirect_uri to get an access_token.
