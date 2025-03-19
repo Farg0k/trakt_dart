@@ -230,7 +230,7 @@ class Users extends Category {
           queryParameters: params);
     }
 
-    return await _manager._getList<UserCollectionItem>("users/$id/collection/${type.value}", queryParamameters: params);
+    return await _manager._getList<UserCollectionItem>("users/$id/collection/${type.value}", queryParameters: params);
   }
 
   /// Returns the most recently written comments for the user.
@@ -276,7 +276,7 @@ class Users extends Category {
     }
 
     return await _manager._getList<MediaComment>("users/$id/comments$request",
-        queryParamameters: params, pagination: pagination, extendedFull: extendedFull);
+        queryParameters: params, pagination: pagination, extendedFull: extendedFull);
   }
 
   /// Returns all custom lists for a user.
@@ -714,7 +714,7 @@ class Users extends Category {
           extendedFull: extendedFull, pagination: pagination, queryParameters: params);
     }
     return await _manager._getList<HistoryItem>(request,
-        extendedFull: extendedFull, pagination: pagination, queryParamameters: params);
+        extendedFull: extendedFull, pagination: pagination, queryParameters: params);
   }
 
   /// Get a user's ratings filtered by type.
@@ -868,7 +868,7 @@ class Users extends Category {
       return await _manager._authenticatedGetList<WatchedItem>("users/$id/watched/${type.value}",
           queryParameters: params);
     }
-    return await _manager._getList<WatchedItem>("users/$id/watched/${type.value}", queryParamameters: params);
+    return await _manager._getList<WatchedItem>("users/$id/watched/${type.value}", queryParameters: params);
   }
 
   /// Returns stats about the movies, shows, and episodes a user has watched, collected, and rated.

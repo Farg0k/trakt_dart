@@ -231,7 +231,7 @@ class Comments extends Category {
     return await _manager._getList<MediaComment>("comments/trending$request",
         extendedFull: extendedFull,
         pagination: pagination,
-        queryParamameters: params);
+        queryParameters: params);
   }
 
   /// Returns the most recently written comments across all of Trakt.
@@ -266,7 +266,7 @@ class Comments extends Category {
     return await _manager._getList<MediaComment>("comments/recent$request",
         extendedFull: extendedFull,
         pagination: pagination,
-        queryParamameters: params);
+        queryParameters: params);
   }
 
   /// Returns the most recently written comments across all of Trakt.
@@ -301,6 +301,6 @@ class Comments extends Category {
     return await _manager._getList<MediaComment>("comments/updates$request",
         extendedFull: extendedFull,
         pagination: pagination,
-        queryParamameters: params);
+        queryParameters: params);
   }
 }

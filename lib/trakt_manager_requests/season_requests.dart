@@ -27,7 +27,7 @@ class Seasons extends Category {
       params["extended"] = extendedParams.join(",");
     }
     return await _manager._getList("shows/$id/seasons",
-        queryParamameters: params);
+        queryParameters: params);
   }
 
   /// Returns all episodes for a specific season of a show.
@@ -46,7 +46,7 @@ class Seasons extends Category {
     Map<String, String>? params =
         translations == null ? null : {"translations": translations};
     return await _manager._getList("shows/$id/seasons/$seasonNumber",
-        extendedFull: extendedFull, queryParamameters: params);
+        extendedFull: extendedFull, queryParameters: params);
   }
 
   /// Returns all top level comments for a season.

@@ -206,8 +206,8 @@ class TraktManager {
       {bool extendedFull = false,
       RequestPagination? pagination,
       Filters? filters,
-      Map<String, dynamic>? queryParamameters}) async {
-    final queryParams = queryParamameters ?? {};
+      Map<String, dynamic>? queryParameters}) async {
+    final queryParams = queryParameters ?? {};
 
     queryParams.addAll(pagination?.toMap() ?? {});
     queryParams.addAll(filters?.toMap() ?? {});

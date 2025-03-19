@@ -43,7 +43,7 @@ class Search extends Category {
         extendedFull: extendedFull,
         pagination: pagination,
         filters: filters,
-        queryParamameters: params);
+        queryParameters: params);
   }
 
   /// Lookup items by their Trakt, IMDB, TMDB, or TVDB ID.
@@ -72,6 +72,6 @@ class Search extends Category {
     return await _manager._getList<SearchResult>("search/${idType.value}/$id",
         extendedFull: extendedFull,
         pagination: pagination,
-        queryParamameters: params);
+        queryParameters: params);
   }
 }
