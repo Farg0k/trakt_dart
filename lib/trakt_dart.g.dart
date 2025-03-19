@@ -55,8 +55,8 @@ Certification _$CertificationFromJson(Map<String, dynamic> json) =>
 
 CheckInSharing _$CheckInSharingFromJson(Map<String, dynamic> json) =>
     CheckInSharing(
-      twitter: json['twitter'] as bool,
-      tumblr: json['tumblr'] as bool,
+      twitter: json['twitter'] as bool?,
+      tumblr: json['tumblr'] as bool?,
     );
 
 Map<String, dynamic> _$CheckInSharingToJson(CheckInSharing instance) =>

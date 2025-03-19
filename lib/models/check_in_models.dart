@@ -2,7 +2,7 @@ part of trakt_dart;
 
 @JsonSerializable()
 class CheckInSharing {
-  final bool twitter, tumblr;
+  final bool? twitter, tumblr;
 
   CheckInSharing({required this.twitter, required this.tumblr});
 
