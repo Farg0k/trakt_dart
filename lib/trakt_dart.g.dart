@@ -817,9 +817,11 @@ PersonShowCrewCreditsList _$PersonShowCrewCreditsListFromJson(
 
 ScrobbleResponse _$ScrobbleResponseFromJson(Map<String, dynamic> json) =>
     ScrobbleResponse(
-      json['id'] as int,
-      json['action'] as String,
-      (json['progress'] as num).toDouble(),
+      json['id'] as int?,
+      json['action'] as String?,
+      json['progress'] == null
+              ? null
+              :(json['progress'] as num).toDouble(),
           json['sharing'] == null
               ? null
               : CheckInSharing.fromJson(json['sharing'] as Map<String, dynamic>),
@@ -832,6 +834,8 @@ ScrobbleResponse _$ScrobbleResponseFromJson(Map<String, dynamic> json) =>
       json['show'] == null
           ? null
           : Show.fromJson(json['show'] as Map<String, dynamic>),
+          json['watched_at'] as String?,
+          json['expires_at'] as String?,
     );
 
 SearchResult _$SearchResultFromJson(Map<String, dynamic> json) => SearchResult(

@@ -283,13 +283,14 @@ class TraktManager {
   }
 
   Future<T> _authenticatedPost<T>(String request, {String? body}) async {
-    assert(_accessToken != null, "Autheticate app and get access token before making authenticated request.");
+    assert(_accessToken != null, "Authenticate app and get access token before making authenticated request.");
 
     final headers = _headers;
     headers["Authorization"] = "Bearer ${_accessToken!}";
 
     final url = Uri.https(_baseURL, request);
     final response = await client.post(url, headers: _headers, body: body);
+
     if (![200, 201, 204, 409].contains(response.statusCode)) {
       throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
     }
