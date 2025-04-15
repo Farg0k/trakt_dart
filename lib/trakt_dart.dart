@@ -290,8 +290,7 @@ class TraktManager {
 
     final url = Uri.https(_baseURL, request);
     final response = await client.post(url, headers: _headers, body: body);
-
-    if (![200, 201, 204].contains(response.statusCode)) {
+    if (![200, 201, 204, 409].contains(response.statusCode)) {
       throw TraktManagerAPIError(response.statusCode, response.reasonPhrase, response);
     }
 
